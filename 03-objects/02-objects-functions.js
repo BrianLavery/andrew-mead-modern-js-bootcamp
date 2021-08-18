@@ -37,9 +37,13 @@ let convertFahrenheit = function (fahrenheit) {
   return {
     fahrenheit: fahrenheit,
     celsius: (fahrenheit - 32) / 1.8,
+    // kelvin: this.celsius + 273.15
     kelvin: (fahrenheit - 32) / 1.8 + 273.15,
+    // other: this.celsius => returns undefined
   }
 }
 
+let result = convertFahrenheit(212);
+console.log(result)
 let kelvin = convertFahrenheit(212).kelvin;
 console.log(kelvin)
