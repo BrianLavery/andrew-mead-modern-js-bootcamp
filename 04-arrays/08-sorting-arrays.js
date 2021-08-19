@@ -29,3 +29,39 @@ const sortNotes = (notes) => {
 console.log(notes);
 sortNotes(notes);
 console.log(notes);
+
+// Challenge - sort to dos functions
+// Completed last, incomplete first
+todos = [{
+  text: 'Order cat food',
+  completed: true
+}, {
+  text: 'Clean kitchen',
+  completed: false
+}, {
+  text: 'Buy food',
+  completed: true,
+}, {
+  text: 'Do work',
+  completed: false
+}, {
+  text: 'Exercise',
+  completed: true
+}]
+
+// My approach
+const sortTodos = (todos) => {
+  todos.sort((a, b) => {
+    if (a.completed && !b.completed) {
+      return 1;
+    } else if (!a.completed && b.completed) {
+      return -1;
+    } else {
+      return 0;
+    }
+  })
+}
+
+console.log(todos);
+sortTodos(todos);
+console.log(todos);
