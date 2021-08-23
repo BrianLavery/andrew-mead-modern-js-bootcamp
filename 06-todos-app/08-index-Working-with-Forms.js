@@ -16,26 +16,17 @@ todos = [{
 }]
 
 const filters = {
-  searchText: '',
-  hideCompleted: false
+  searchText: ''
 }
 
 const renderTodos = (todos, filters) => {
-  // ALTERNATIVES AT BOTTOM
   filteredTodos = todos.filter((todo) => {
-    // 'One liner' for the longer approach below
-    return (todo.text.toLowerCase().includes(filters.searchText.toLowerCase()) && !filters.hideCompleted) || (todo.text.toLowerCase().includes(filters.searchText.toLowerCase()) && !todo.completed);
-    
-    // if (filters.hideCompleted) {
-    //   return (todo.text.toLowerCase().includes(filters.searchText.toLowerCase()) && !todo.completed);
-    // } else {
-    //   return todo.text.toLowerCase().includes(filters.searchText.toLowerCase());
-    // }
+    return todo.text.toLowerCase().includes(filters.searchText.toLowerCase());
   })
   document.querySelector('#todos-container').innerHTML = '';
   
   const todosCount = document.createElement('h3');
-  todosCount.textContent = `${filteredTodos.length} todos in total`;
+  todosCount.textContent = `${filteredTodos.length} todos match your search`;
   document.querySelector('#todos-container').appendChild(todosCount);
 
   const incompleteTodos = filteredTodos.filter((todo) => {
@@ -68,9 +59,4 @@ document.querySelector('#new-todo-form').addEventListener('submit', (e) => {
   });
   renderTodos(todos, filters);
   e.target.elements.todoText.value = '';
-})
-
-document.querySelector('#hide-completed').addEventListener('change', (e) => {
-  filters.hideCompleted = e.target.checked;
-  renderTodos(todos, filters);
 })

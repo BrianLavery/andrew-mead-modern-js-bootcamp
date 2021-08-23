@@ -13,36 +13,6 @@ const filters = {
   searchText: ''
 }
 
-// Can save data locally with local Storage
-// Loal storage will only support string storage
-
-// CREATE - pass in a key and a value
-// localStorage.setItem('location', 'Philadephia');
-
-// // READ - pass in key and get value returned
-// console.log(localStorage.getItem('location'));
-
-// // DELETE - takes key as argument
-// localStorage.removeItem('location');
-
-// // DELETE - we can clear local storage. Deletes all keys and values
-// localStorage.clear();
-
-// Storing objects in local storage
-// const user = {
-//   name: 'Andrew',
-//   age: 27
-// }
-
-// // Stringify takes object and passes to string
-// const userJSON = JSON.stringify(user);
-// console.log(userJSON); // Outputs as string - double quotes used everywhere
-// localStorage.setItem('user', userJSON);
-
-const userJSON = localStorage.getItem('user');
-const user = JSON.parse(userJSON);
-console.log(`${user.name} is ${user.age}'s years old`);
-
 const renderNotes = (notes, filters) => {
   const filteredNotes = notes.filter((note) => {
     return note.title.toLowerCase().includes(filters.searchText.toLowerCase());

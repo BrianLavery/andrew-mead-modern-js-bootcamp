@@ -74,3 +74,10 @@ document.querySelector('#hide-completed').addEventListener('change', (e) => {
   filters.hideCompleted = e.target.checked;
   renderTodos(todos, filters);
 })
+
+
+// ALTERNATIVES TO APPROACH
+// 1. FILTER FILTERED TODOS - SO RUN THE CODE 2X
+// 2. FILTER IT 2X - BUT USE A LOGICAL OR OPERATOR
+// 3,4. My 2 approaches
+// 5. His approach - sets up 2 logical statments and then compares - so he has more lines but his code is more DRY

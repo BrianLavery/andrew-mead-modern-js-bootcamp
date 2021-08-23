@@ -74,3 +74,8 @@ document.querySelector('#hide-completed').addEventListener('change', (e) => {
   filters.hideCompleted = e.target.checked;
   renderTodos(todos, filters);
 })
+
+
+// ALTERNATIVES TO APPROACH
+// 1. FILTER FILTERED TODOS - SO RUN THE CODE 2X
+// 2. FILTER IT 2X - BUT USE A LOGICAL OR OPERATOR
