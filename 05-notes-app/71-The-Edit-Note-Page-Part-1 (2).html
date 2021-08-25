@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Notes App</h1>
+    <h2>Take notes and never forget</h2>
+    <input id="search-text" type="text" placeholder="Filter notes">
+    <!-- Dropbox to pick how sorting -->
+    <select id="filter-by">
+      <option value="byEdited">Sort by last edited</option>
+      <option value="byCreated">Sort by recently created</option>
+      <option value="alphabetical">Sort alphabetically</option>
+    </select>
+    <button id="create-note">Create Note</button>
+
+    <div id="notes"></div>
+    
+    <!-- Move script to end so it can access the DOM -->
+    <!-- External library: UUID for unique IDs -->
+    <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
+    <!-- My functions file -->
+    <script src="notes-functions.js"></script>
+    <!-- My main JS file -->
+    <script src="notes.js"></script>
+  </body>
+</html>
