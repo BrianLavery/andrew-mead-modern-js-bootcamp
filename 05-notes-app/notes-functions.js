@@ -1,11 +1,13 @@
+// This now starts strict mode
+'use strict'
+
 // Read existing notes from local storage
 const getSavedNotes = () => {
   const notesJSON = localStorage.getItem('notes')
-
-  if (notesJSON !== null) {
-    return JSON.parse(notesJSON);
-  } else {
-    return []
+  try {
+    return notesJSON ? JSON.parse(notesJSON) : []
+  } catch (e) {
+    return [];
   }
 }
 
@@ -17,9 +19,7 @@ const saveNotes = (notes) => {
 // Remove a note from the list
 const removeNote = (id) => {
   // Find index of note for which we have the id
-  const noteIndex = notes.findIndex((note) => {
-    return note.id === id;
-  })
+  const noteIndex = notes.findIndex((note) => note.id === id);
 
   // If found then we delete it from the array
   if (noteIndex > -1) {
@@ -97,9 +97,7 @@ const renderNotes = (notes, filters) => {
   notes = sortNotes(notes, filters.sortBy);
   
   // Filter for only notes with right search text
-  const filteredNotes = notes.filter((note) => {
-    return note.title.toLowerCase().includes(filters.searchText.toLowerCase());
-  })
+  const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(filters.searchText.toLowerCase()));
   
   // Wipe the notes container
   document.querySelector('#notes').innerHTML = '';
@@ -112,6 +110,4 @@ const renderNotes = (notes, filters) => {
 }
 
 // Generate last edited message
-const generateLastEdited = (timestamp) => {
-  return `Last edited ${moment(timestamp).fromNow()}`
-}
+const generateLastEdited = (timestamp) => `Last edited ${moment(timestamp).fromNow()}`;

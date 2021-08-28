@@ -1,3 +1,6 @@
+// This now starts strict mode
+'use strict'
+
 // Query selectors for DOM elements access repeatedly
 const titleElement = document.querySelector('#note-title');
 const dateElement = document.querySelector('#last-edited');
@@ -11,11 +14,9 @@ const noteId = location.hash.substring(1);
 let notes = getSavedNotes();
 
 // Find the note with the id passed in
-let note = notes.find((note) => {
-  return note.id === noteId;
-})
+let note = notes.find((note) => note.id === noteId);
 
-if (note === undefined) {
+if (!note) {
   // Redirect to home page if we have an issue
   location.assign('/index.html')
 }
@@ -63,11 +64,9 @@ window.addEventListener('storage', (e) => {
     notes = JSON.parse(e.newValue);
     
     // Find the note with the id passed in
-    note = notes.find((note) => {
-      return note.id === noteId;
-    })
+    note = notes.find((note) => note.id === noteId);
     
-    if (note === undefined) {
+    if (!note) {
       // Redirect to home page if we have an issue
       location.assign('/index.html')
     }

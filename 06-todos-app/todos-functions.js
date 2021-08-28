@@ -1,10 +1,12 @@
+// This now starts strict mode
+'use strict'
+
 // Get saved todos from local storage
 const getSavedTodos = () => {
   const todosJSON = localStorage.getItem('todos');
-
-  if (todosJSON !== null) {
-    return JSON.parse(todosJSON);
-  } else {
+  try {
+    return todosJSON ? JSON.parse(todosJSON): [];
+  } catch (error) {
     return [];
   }
 }
@@ -16,9 +18,7 @@ const saveTodos = (todos) => {
 
 // Remove todo from the list
 const removeTodo = (id) => {
-  const todoIndex = todos.findIndex((todo) => {
-    return todo.id === id;
-  })
+  const todoIndex = todos.findIndex((todo) => todo.id === id);
   if (todoIndex > -1) {
     todos.splice(todoIndex, 1);
   }
@@ -81,9 +81,7 @@ const renderTodos = (todos, filters) => {
   document.querySelector('#todos-container').innerHTML = '';
 
   // Filter for incomplete todos
-  const incompleteTodos = filteredTodos.filter((todo) => {
-    return !todo.completed;
-  })
+  const incompleteTodos = filteredTodos.filter((todo) => !todo.completed);
 
   // Generate summary and push into todos container
   const summary = generateSummaryDOM(incompleteTodos);

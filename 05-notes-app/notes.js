@@ -1,3 +1,6 @@
+// This now starts strict mode
+'use strict'
+
 let notes = getSavedNotes();
 
 const filters = {
@@ -39,4 +42,3 @@ window.addEventListener('storage', (e) => {
   }
 })
 
-// MOMENT
