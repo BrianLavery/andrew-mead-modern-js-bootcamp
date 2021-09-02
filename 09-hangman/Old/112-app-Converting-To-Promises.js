@@ -29,9 +29,9 @@ window.addEventListener('keypress', (e) => {
 })
 
 getPuzzle(2).then((puzzle) => {
-  console.log(`Fetch API - final: ${puzzle}`)
-}).catch((error) => {
-  console.log(error)
+  console.log(puzzle)
+}, (error) => {
+  console.log(`Error: ${error}`)
 })
 
 
@@ -41,21 +41,4 @@ getCountry(countryCode).then((countryName) => {
   console.log(countryName)
 }, (error) => {
   console.log(`Error: ${error}`)
-})
-
-// FETCH API
-// FETCH returns a promise
-// Promise only resolves if everything went well
-fetch('http://puzzle.mead.io/puzzle', {}).then((response) => {
-  if (response.status === 200) {
-    // This returns a promise
-    return response.json()
-  } else {
-    // This will cause the catch to get fired
-    throw new Error('Unable to fetch the puzzle')
-  }
-}).then((data) => {
-  console.log(`Fetch API: ${data.puzzle}`)
-}).catch((error) => {
-  console.log(error)
 })
