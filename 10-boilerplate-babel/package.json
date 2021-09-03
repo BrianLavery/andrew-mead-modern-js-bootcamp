@@ -4,11 +4,13 @@
   "description": "",
   "main": "130-input.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src/index.js -o public/scripts/bundle.js --presets env --watch"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel-preset-env": "^1.7.0"
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "live-server": "^1.2.1"
   }
 }
