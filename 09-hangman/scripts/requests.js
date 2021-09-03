@@ -1,5 +1,5 @@
 const getPuzzle = async (wordCount) => {
-  const response = await fetch(`http://puzzle.mead.io/puzzle?wordCount=${wordCount}`)
+  const response = await fetch(`//puzzle.mead.io/puzzle?wordCount=${wordCount}`)
   
   if (response.status === 200) {
     const data = await response.json()
@@ -10,7 +10,7 @@ const getPuzzle = async (wordCount) => {
 }
 
 const getCountry = async (countryCode) => {
-  const response = await fetch('http://restcountries.eu/rest/v2/all', {})
+  const response = await fetch('//restcountries.eu/rest/v2/all', {})
   
   if (response.status === 200) {
     const data = await response.json()
@@ -21,7 +21,7 @@ const getCountry = async (countryCode) => {
 }
 
 const getLocation = async () => {
-  const response = await fetch('http://ipinfo.io/json?token=27a661ecb69d53', {})
+  const response = await fetch('//ipinfo.io/json?token=27a661ecb69d53', {})
 
   if (response.status === 200) {
     return response.json()
@@ -32,13 +32,13 @@ const getLocation = async () => {
 
 // MY APPROACH - empirical way not relying on other functions
 getCurrentCountryBrian = async () => {
-  const locationResponse = await fetch('http://ipinfo.io/json?token=27a661ecb69d53', {})
+  const locationResponse = await fetch('//ipinfo.io/json?token=27a661ecb69d53', {})
 
   if (locationResponse.status === 200) {
     const location = await locationResponse.json()
     const countryCode = location.country
 
-    const countryResponse = await fetch('http://restcountries.eu/rest/v2/all', {})
+    const countryResponse = await fetch('//restcountries.eu/rest/v2/all', {})
 
     if (countryResponse.status === 200) {
       const data = await countryResponse.json()

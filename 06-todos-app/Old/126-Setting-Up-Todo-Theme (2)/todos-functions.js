@@ -27,16 +27,17 @@ const removeTodo = (id) => {
 // Get DOM elements for an individual note
 const generateTodoDOM = (todo, index) => {
   // Create all my elements
-  const todoEl = document.createElement('div');
+  const todoEl = document.createElement('label');
+  const containerEl = document.createElement('div');
   const checkbox = document.createElement('input');
-  const text = document.createElement('span');
+  const todoText = document.createElement('span');
   const button = document.createElement('button');
 
   // Setup checkbox element and push into note element
   checkbox.setAttribute('type', 'checkbox');
   // Mark it as checked if it is completed
   checkbox.checked = todo.completed;
-  todoEl.appendChild(checkbox);
+  containerEl.appendChild(checkbox);
   // Updated completed if receive input
   checkbox.addEventListener('change', (e) => {
     todo.completed = e.target.checked;
@@ -44,12 +45,18 @@ const generateTodoDOM = (todo, index) => {
     renderTodos(todos, filters);
   })
   
-  // Setup text element with todo info
-  text.textContent = `${index + 1}. ${todo.text}`;
-  todoEl.appendChild(text);
+  // Setup todoText element with todo info
+  todoText.textContent = `${index + 1}. ${todo.text}`;
+  containerEl.appendChild(todoText);
+
+  // Setup container
+  todoEl.classList.add('list-item')
+  containerEl.classList.add('list-item__container')
+  todoEl.appendChild((containerEl))
 
   // Setup delete button
-  button.textContent = 'x';
+  button.textContent = 'remove';
+  button.classList.add('button', 'button--text')
   todoEl.appendChild(button);
   button.addEventListener('click', () => {
     removeTodo(todo.id);
@@ -63,34 +70,45 @@ const generateTodoDOM = (todo, index) => {
 
 // Get the DOM elements for list summary
 const generateSummaryDOM = (incompleteTodos) => {
-  const summary = document.createElement('h3');
-  summary.textContent = `${incompleteTodos.length} todos are incomplete`;
+  const summary = document.createElement('h2');
+  summary.classList.add('list-title')
+  const numTodos = incompleteTodos.length
+  const todoText = numTodos === 1 ? 'todo' : 'todos'
+  summary.textContent = `You have ${numTodos} ${todoText} remaining`;
   return summary;
 }
 
 
 // Render application todos based on filters
 const renderTodos = (todos, filters) => {
+  const todoEl = document.querySelector('#todos-container')
+  
   // ALTERNATIVES AT BOTTOM
-  filteredTodos = todos.filter((todo) => {
+  const filteredTodos = todos.filter((todo) => {
     // Select only todos that match search text and where either it isn't completed (or if hideCompleted flag is off then also accept)
     return (todo.text.toLowerCase().includes(filters.searchText.toLowerCase()) && !filters.hideCompleted) || (todo.text.toLowerCase().includes(filters.searchText.toLowerCase()) && !todo.completed);
   })
   
   // Clear the todos container
-  document.querySelector('#todos-container').innerHTML = '';
+  todoEl.innerHTML = '';
 
   // Filter for incomplete todos
   const incompleteTodos = filteredTodos.filter((todo) => !todo.completed);
 
   // Generate summary and push into todos container
   const summary = generateSummaryDOM(incompleteTodos);
-  document.querySelector('#todos-container').appendChild(summary);
+  todoEl.appendChild(summary);
 
   // For each filtered todo iterate over, generate DOM element and push into container
-  filteredTodos.forEach((todo, index) => {
-    const todoElement = generateTodoDOM(todo, index)
-    document.querySelector('#todos-container').appendChild(todoElement);
-  })
+  if (filteredTodos.length > 0) {
+    filteredTodos.forEach((todo, index) => {
+      todoEl.appendChild(generateTodoDOM(todo, index));
+    })
+  } else {
+    const messageEl = document.createElement('p')
+    messageEl.classList.add('empty-message')
+    messageEl.textContent = 'No to-dos to show'
+    todoEl.appendChild(messageEl)
+  }
 }
   

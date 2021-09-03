@@ -3,7 +3,7 @@
 
 const todos = getSavedTodos();
 
-filters = {
+const filters = {
   hideCompleted: false,
   searchText: ""
 }
@@ -19,18 +19,24 @@ document.querySelector('#todo-search-filter').addEventListener('input', (e) => {
 
 document.querySelector('#new-todo-form').addEventListener('submit', (e) => {
   e.preventDefault();
+
+  // Because we set this variable up as text we don't need to name in the todos.push code below
+  const text = e.target.elements.todoText.value.trim()
+
   // Update todos array with a new object
-  todos.push({
-    id: uuidv4(),
-    text: e.target.elements.todoText.value,
-    completed: false
-  });
-  // Save updated todos in local storage again
-  saveTodos(todos);
-  // Re-render todos
-  renderTodos(todos, filters);
-  // Clear the input value on the input
-  e.target.elements.todoText.value = '';
+  if (text.length > 0) {
+    todos.push({
+      id: uuidv4(),
+      text,
+      completed: false
+    });
+    // Save updated todos in local storage again
+    saveTodos(todos);
+    // Re-render todos
+    renderTodos(todos, filters);
+    // Clear the input value on the input
+    e.target.elements.todoText.value = '';
+  }
 })
 
 document.querySelector('#hide-completed').addEventListener('change', (e) => {
