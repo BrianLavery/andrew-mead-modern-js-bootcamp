@@ -10,21 +10,6 @@ const removeElement = document.querySelector('#remove-note');
 // Get parameter from the url but exclude the # using substring
 const noteId = location.hash.substring(1);
 
-// We can get notes from local storage
-let notes = getSavedNotes();
-
-// Find the note with the id passed in
-let note = notes.find((note) => note.id === noteId);
-
-if (!note) {
-  // Redirect to home page if we have an issue
-  location.assign('/index.html')
-}
-
-// Put stored value in the inputs when user accesses edit page
-titleElement.value = note.title;
-dateElement.textContent = generateLastEdited(note.updatedAt);
-bodyElement.value = note.body;
 
 
 // Event input for title
