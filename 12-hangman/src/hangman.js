@@ -46,7 +46,7 @@ class Hangman {
     const isUnique = !this.guessedLetters.includes(guess)
     const isIncorrect = !this.word.includes(guess)
     
-    if (game.status !== 'playing') {
+    if (this.status !== 'playing') {
       return
     }
   
@@ -59,3 +59,5 @@ class Hangman {
     }
   }
 }
+
+export { Hangman as default }

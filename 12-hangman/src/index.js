@@ -1,3 +1,6 @@
+import Hangman from './hangman'
+import getPuzzle from './requests'
+
 const puzzleEl = document.querySelector('#puzzle');
 const statusEl = document.querySelector('#status');
 const resetButton = document.querySelector('#reset')
@@ -38,17 +41,3 @@ resetButton.addEventListener('click', startGame)
 
 // Start the game
 startGame()
-
-getCurrentCountry().then((countryName) => {
-  console.log(countryName)
-}).catch((error) => {
-  console.log(error)
-})
-
-getLocation().then((location) => {
-  return getCountry(location.country)
-}).then((countryName) => {
-  console.log(`Country: ${countryName}`)
-}).catch((error) => {
-  console.log(error)
-})
