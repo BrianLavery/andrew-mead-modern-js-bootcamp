@@ -7,7 +7,7 @@ const processDataOld = async () => {
 }
 
 processDataOld().then((data) => {
-  console.log('Data', data)
+  console.log('Data (12)', data)
 }).catch((error) => {
   console.log('Error', error)
 })
@@ -38,7 +38,7 @@ const processData = async () => {
 }
 
 processData().then((data) => {
-  console.log('Data', data)
+  console.log('Data (2 ** 3)', data)
 }).catch((error) => {
   console.log('Error', error)
 })
